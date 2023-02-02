@@ -14,17 +14,25 @@ def send_welcome(message):
 def get_user_text(message):
     if message.text == message.text:
         message_type = int(message.text)
-        mess_bin = bin(message_type)[2:]
-        mess_bin1 = str(mess_bin)
-        mess_bin2 = str(mess_bin)
-        zero = '\x30\xE2\x83\xA3'
-        mess_bin1 = mess_bin1.replace('1', '⬜')
-        mess_bin1 = mess_bin1.replace('0', '🟥')
-        mess_bin2 = mess_bin2.replace('1', '⚪')
-        mess_bin2 = mess_bin2.replace('0', '🔴')
+        if message_type < 256:
+            mess_bin = bin(message_type)[2:][::-1]
 
-        bot.send_message(message.chat.id, mess_bin1.ljust(8, '🟥'), parse_mode='html')
-        bot.send_message(message.chat.id, mess_bin2.ljust(8, '🔴'), parse_mode='html')
+
+            mess_bot = '12345678'
+            mess_bot = mess_bot.replace('1', '1️⃣')
+            mess_bot = mess_bot.replace('2', '2️⃣')
+            mess_bot = mess_bot.replace('3', '3️⃣')
+            mess_bot = mess_bot.replace('4', '4️⃣')
+            mess_bot = mess_bot.replace('5', '5️⃣')
+            mess_bot = mess_bot.replace('6', '6️⃣')
+            mess_bot = mess_bot.replace('7', '7️⃣')
+            mess_bot = mess_bot.replace('8', '8️⃣\n')
+            mess_bin = mess_bin.replace('1', '🟩')
+            mess_bin = mess_bin.replace('0', '⬛')
+
+            bot.send_message(message.chat.id, mess_bot + mess_bin.ljust(8, '⬛'), parse_mode='html')
+        else:
+            bot.send_message(message.chat.id, 'Введите число от 1 до 255', parse_mode='html')
 
 
 
